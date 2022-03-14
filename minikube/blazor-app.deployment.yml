@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazor-app
+  labels:
+    app: blazor-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blazor-app
+  template:
+    metadata:
+      labels:
+        app: blazor-app
+    spec:
+      containers:
+      - name: blazor-app
+        image: blazor-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
