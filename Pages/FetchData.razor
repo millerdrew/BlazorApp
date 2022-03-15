@@ -3,13 +3,15 @@
 <PageTitle>Weather forecast</PageTitle>
 
 @using BlazorApp.Data
+@using StackExchange.Redis;
 @inject WeatherForecastService ForecastService
+@inject IConnectionMultiplexer Redis
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (forecasts == null || value == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -22,6 +24,7 @@ else
                 <th>Temp. (C)</th>
                 <th>Temp. (F)</th>
                 <th>Summary</th>
+                <th>Redis Test</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +35,7 @@ else
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
+                    <td>@value</td>
                 </tr>
             }
         </tbody>
@@ -40,9 +44,15 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+    private string? value;
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        IDatabase db = Redis.GetDatabase();
+        string value1 = "abcdef";
+        db.StringSet("mykey", value1);
+        string value2 = db.StringGet("mykey");
+        value = value2;
     }
 }
