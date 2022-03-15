@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorApp.Data;
+using Tailwind;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.RunTailwind("tailwind", "./");
+}
 
 app.UseStaticFiles();
 
