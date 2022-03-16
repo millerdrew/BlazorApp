@@ -1,0 +1,5 @@
+resources:
+- blazor-app.deployment.yaml
+- blazor-app.service.yaml
+- redis.deployment.yaml
+- redis.service.yaml

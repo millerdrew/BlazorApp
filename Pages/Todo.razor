@@ -1,5 +1,8 @@
 ﻿@page "/todo"
 
+@using StackExchange.Redis;
+@inject IConnectionMultiplexer Redis
+
 <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
 
 <ul>
