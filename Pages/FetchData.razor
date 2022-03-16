@@ -50,9 +50,6 @@ else
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
         IDatabase db = Redis.GetDatabase();
-        string value1 = "abcdef";
-        db.StringSet("mykey", value1);
-        string value2 = db.StringGet("mykey");
-        value = value2;
+        value = db.StringGet("mykey").IsNullOrEmpty ? "empty" : db.StringGet("mykey");
     }
 }
