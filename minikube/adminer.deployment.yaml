@@ -23,3 +23,5 @@ spec:
         env:
         - name: ADMINER_DEFAULT_SERVER
           value: postgres
+        - name: ADMINER_DESIGN
+          value: hydra
