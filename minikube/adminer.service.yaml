@@ -7,9 +7,9 @@ metadata:
   namespace: default
 spec:
   ports:
+  type: NodePort
   - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     app: adminer
-  type: ClusterIP
