@@ -11,5 +11,5 @@ spec:
     protocol: TCP
     targetPort: 5432
   selector:
-    app: adminer
+    app: postgres
   type: ClusterIP
