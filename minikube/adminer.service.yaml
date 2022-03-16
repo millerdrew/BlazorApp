@@ -7,9 +7,9 @@ metadata:
   namespace: default
 spec:
   ports:
-  - port: 5432
+  - port: 8080
     protocol: TCP
-    targetPort: 5432
+    targetPort: 8080
   selector:
     app: adminer
   type: ClusterIP
