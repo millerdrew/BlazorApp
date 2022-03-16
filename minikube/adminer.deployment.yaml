@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: adminer
   labels:
-    app: postgres
+    app: adminer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: adminer
   template:
     metadata:
       labels:
-        app: postgres
+        app: adminer
     spec:
       containers:
-      - name: postgres
-        image: postgres:latest
+      - name: adminer
+        image: adminer:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 5432
+        - containerPort: 8080
         env:
-        - name: POSTGRES_PASSWORD
-          value: password
+        - name: ADMINER_DEFAULT_SERVER
+          value: postgres
