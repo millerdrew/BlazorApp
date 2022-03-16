@@ -3,7 +3,8 @@ using Tailwind;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
-var multiplexer = ConnectionMultiplexer.Connect("localhost");
+Console.WriteLine("Update host for k8s cluster");
+var multiplexer = ConnectionMultiplexer.Connect("redis");
 
 // Add services to the container.
 builder.Services.AddRazorPages();
