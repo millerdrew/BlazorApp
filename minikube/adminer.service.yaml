@@ -6,8 +6,8 @@ metadata:
   name: adminer
   namespace: default
 spec:
-  ports:
   type: NodePort
+  ports:
   - port: 8080
     protocol: TCP
     targetPort: 8080
