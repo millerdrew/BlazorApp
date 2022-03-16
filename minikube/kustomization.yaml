@@ -5,3 +5,5 @@ resources:
 - redis.service.yaml
 - postgres.deployment.yaml
 - postgres.service.yaml
+- adminer.deployment.yaml
+- adminer.service.yaml
