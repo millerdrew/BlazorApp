@@ -5,3 +5,4 @@ resources:
 - postgres.yaml
 - adminer.yaml
 - database-storage.yaml
+- cache-storage.yaml

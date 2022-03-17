@@ -20,6 +20,13 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 6379
+        volumeMounts:
+        - mountPath: /data
+          name: redis-pv-claim
+      volumes:
+      - name: redis-pv-claim
+        persistentVolumeClaim:
+          claimName: redis-pv-claim
 ---
 apiVersion: v1
 kind: Service
