@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: redisinsight
+    meta.helm.sh/release-namespace: default
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: redisinsight
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: redisinsight-chart
+    helm.sh/chart: redisinsight-chart-0.1.0
+  name: redisinsight-redisinsight-chart
+  namespace: default
+  resourceVersion: "44961"
+  uid: 70e9dd13-1fab-4dbd-a016-cbb3456bb05f
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: redisinsight
+      app.kubernetes.io/name: redisinsight-chart
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: redisinsight
+        app.kubernetes.io/name: redisinsight-chart
+    spec:
+      containers:
+      - image: redislabs/redisinsight:latest
+        imagePullPolicy: IfNotPresent
+        name: redisinsight-chart
+        ports:
+        - containerPort: 8001
+          name: http
+          protocol: TCP
+        resources: {}
+        securityContext: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /db
+          name: db
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: redisinsight-redisinsight-chart
+      serviceAccountName: redisinsight-redisinsight-chart
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: db
