@@ -11,8 +11,6 @@ metadata:
     helm.sh/chart: redisinsight-chart-0.1.0
   name: redisinsight-redisinsight-chart
   namespace: default
-  resourceVersion: "44909"
-  uid: edf4ee20-244e-41ee-b49a-f17ed6109776
 spec:
   clusterIP: 10.103.215.99
   clusterIPs:

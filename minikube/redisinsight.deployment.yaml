@@ -13,8 +13,6 @@ metadata:
     helm.sh/chart: redisinsight-chart-0.1.0
   name: redisinsight-redisinsight-chart
   namespace: default
-  resourceVersion: "44961"
-  uid: 70e9dd13-1fab-4dbd-a016-cbb3456bb05f
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
