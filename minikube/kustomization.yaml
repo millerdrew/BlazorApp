@@ -1,11 +1,6 @@
 resources:
-- blazor-app.deployment.yaml
-- blazor-app.service.yaml
-- redis.deployment.yaml
-- redis.service.yaml
-- redisinsight.deployment.yaml
-- redisinsight.service.yaml
-- postgres.deployment.yaml
-- postgres.service.yaml
-- adminer.deployment.yaml
-- adminer.service.yaml
+- blazor-app.yaml
+- redis.yaml
+- redisinsight.yaml
+- postgres.yaml
+- adminer.yaml
