@@ -30,7 +30,8 @@ if (!app.Environment.IsDevelopment())
 // Tailwind hot reload
 if (app.Environment.IsDevelopment())
 {
-    await app.RunTailwind("tailwind", "./");
+    // Ignore error, adding await will cause build to fail
+    app.RunTailwind("tailwind", "./");
 }
 
 app.UseStaticFiles();
