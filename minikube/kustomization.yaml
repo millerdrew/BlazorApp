@@ -4,3 +4,4 @@ resources:
 - redisinsight.yaml
 - postgres.yaml
 - adminer.yaml
+- database-storage.yaml
