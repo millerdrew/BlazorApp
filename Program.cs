@@ -1,16 +1,23 @@
 using BlazorApp.Data;
 using Tailwind;
 using StackExchange.Redis;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 Console.WriteLine("Update host for k8s cluster");
 var multiplexer = ConnectionMultiplexer.Connect("redis");
+
+var connString = "Host=postgres;Username=postgres;Password=password;Database=postgres";
+
+await using var conn = new NpgsqlConnection(connString);
+await conn.OpenAsync();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+builder.Services.AddSingleton<NpgsqlConnection>(conn);
 
 var app = builder.Build();
 
@@ -23,7 +30,7 @@ if (!app.Environment.IsDevelopment())
 // Tailwind hot reload
 if (app.Environment.IsDevelopment())
 {
-    app.RunTailwind("tailwind", "./");
+    await app.RunTailwind("tailwind", "./");
 }
 
 app.UseStaticFiles();

@@ -6,6 +6,9 @@
 @inject WeatherForecastService ForecastService
 @using StackExchange.Redis
 @inject IConnectionMultiplexer Redis
+@using Npgsql
+@inject NpgsqlConnection conn
+@inject IJSRuntime JS
 
 <h1>Weather forecast</h1>
 
@@ -49,7 +52,42 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
+        // Redis sample
         IDatabase db = Redis.GetDatabase();
         value = db.StringGet("mykey").IsNullOrEmpty ? "empty" : db.StringGet(db.KeyRandom());
+
+        // Postgres sample
+        // Insert some data
+        // await using (var cmd = new NpgsqlCommand("INSERT INTO books (title) VALUES ($1)", conn))
+        // {
+        //     cmd.Parameters.AddWithValue("Hello world");
+        //     await cmd.ExecuteNonQueryAsync();
+        // }
+
+        // Retrieve all rows
+        await using (var cmd = new NpgsqlCommand("SELECT * FROM books", conn))
+        await using (var reader = await cmd.ExecuteReaderAsync())
+        {
+            while (await reader.ReadAsync())
+            {
+                Console.WriteLine(reader.GetString(0));
+            }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) {
+            // Retrieve all rows
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM books", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    await JS.InvokeVoidAsync("console.log", reader.GetString(0));
+                }
+            }
+        }
     }
 }
