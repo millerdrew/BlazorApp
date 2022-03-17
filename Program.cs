@@ -26,11 +26,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-}
-
-// Tailwind hot reload
-if (app.Environment.IsDevelopment())
-{
+    // Tailwind hot reload
     // Ignore error, adding await will cause build to fail
     app.RunTailwind("tailwind", "./");
 }
