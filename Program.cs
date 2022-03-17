@@ -39,6 +39,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.MapGet("/hello", () => "Hello World!");
+
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
