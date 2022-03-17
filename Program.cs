@@ -4,10 +4,11 @@ using StackExchange.Redis;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-Console.WriteLine("Update host for k8s cluster");
-var multiplexer = ConnectionMultiplexer.Connect("redis");
+var getEnv = builder.Build();
+var multiplexer = ConnectionMultiplexer.Connect(getEnv.Environment.IsDevelopment() ? "localhost" : "redis");
 
-var connString = "Host=postgres;Username=postgres;Password=password;Database=postgres";
+var connString = getEnv.Environment.IsDevelopment() ? "Host=localhost;Username=postgres;Password=password;Database=postgres" :
+                                                      "Host=postgres;Username=postgres;Password=password;Database=postgres" ;
 
 await using var conn = new NpgsqlConnection(connString);
 await conn.OpenAsync();
