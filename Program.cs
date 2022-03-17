@@ -4,10 +4,10 @@ using StackExchange.Redis;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-var getEnv = builder.Build();
-var multiplexer = ConnectionMultiplexer.Connect(getEnv.Environment.IsDevelopment() ? "localhost" : "redis");
+string? getEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var multiplexer = ConnectionMultiplexer.Connect(getEnv == "Development" ? "localhost" : "redis");
 
-var connString = getEnv.Environment.IsDevelopment() ? "Host=localhost;Username=postgres;Password=password;Database=postgres" :
+var connString = getEnv == "Development" ? "Host=localhost;Username=postgres;Password=password;Database=postgres" :
                                                       "Host=postgres;Username=postgres;Password=password;Database=postgres" ;
 
 await using var conn = new NpgsqlConnection(connString);
