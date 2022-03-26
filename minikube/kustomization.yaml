@@ -1,8 +1,8 @@
 resources:
-- blazor-app.yaml
 - redis.yaml
 - redisinsight.yaml
 - postgres.yaml
 - adminer.yaml
 - database-storage.yaml
 - cache-storage.yaml
+- blazor-app.yaml
