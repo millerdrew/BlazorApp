@@ -1,8 +1,10 @@
 resources:
-- blazor-app.yaml
-- redis.yaml
 - redisinsight.yaml
-- postgres.yaml
 - adminer.yaml
 - database-storage.yaml
+- postgres.yaml
 - cache-storage.yaml
+- redis.yaml
+- dashboard-service-account.yaml
+- dashboard-cluster-role-binding.yaml
+- blazor-app.yaml
